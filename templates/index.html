@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Attendance App</h1>
+    <div class="container">
+        <div class="video-container">
+            <h2>Inference</h2>
+            <img src="{{ url_for('video_feed_inference') }}" width="640" height="480">
+        </div>
+        <div class="controls">
+            <a href="{{ url_for('gather') }}" class="btn">Gather New Face</a>
+            <form id="train-form" method="post" action="/train_model">
+                <button type="button" id="train-button" class="btn">Train Model</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.getElementById('train-button').addEventListener('click', function() {
+            fetch('/train_model', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gather New Face</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Gather New Face</h1>
+    <div class="container">
+        <div class="video-container">
+            <img src="{{ url_for('video_feed_gather') }}" width="640" height="480">
+        </div>
+        <div class="controls">
+            <form id="capture-form">
+                <input type="text" id="name" name="name" placeholder="Enter Name" required>
+                <button type="button" id="capture-button" class="btn">Capture</button>
+            </form>
+            <a href="{{ url_for('index') }}" class="btn">Back to Home</a>
+        </div>
+    </div>
+    <script>
+        document.getElementById('capture-button').addEventListener('click', function() {
+            let name = document.getElementById('name').value;
+            if (name) {
+                let formData = new FormData();
+                formData.append('name', name);
+
+                fetch('/capture_face', { 
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
