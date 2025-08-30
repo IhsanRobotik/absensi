@@ -24,7 +24,7 @@ video_capture = cv2.VideoCapture(1)
 if not video_capture.isOpened():
     print("[!] Error: Could not open webcam.")
     exit()
-
+89+0
 video_capture.set(cv2.CAP_PROP_BUFFERSIZE, 1)
 
 print("[*] Press 'q' to quit.")
